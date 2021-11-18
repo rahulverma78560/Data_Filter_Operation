@@ -2,4 +2,4 @@
 
 Dev Start Script = npm run dev 
 
-Compiled start script = npm start
+Compiled Start Script = npm start
