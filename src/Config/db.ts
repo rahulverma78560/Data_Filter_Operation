@@ -4,8 +4,8 @@ import chalk from "chalk";
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(
-      "mongodb+srv://G7CR:G7CR@cluster0.l5qv2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority" ||
-        process.env.MONGO_URI
+      process.env.MONGO_URI ||
+        "mongodb+srv://G7CR:G7CR@cluster0.l5qv2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
     );
     console.log(
       chalk.blueBright.bold(
