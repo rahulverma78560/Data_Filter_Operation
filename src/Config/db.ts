@@ -17,7 +17,9 @@ const connectDB = async () => {
   }
 };
 function handleError(error: unknown) {
-  throw new Error("An error occured while connecting to MongoDB");
+  throw new Error(
+    "Oppppps!!!!!!!!!!!...An error occured while connecting to MongoDB"
+  );
 }
 
 export default connectDB;
