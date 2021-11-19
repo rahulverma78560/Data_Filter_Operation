@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(
     chalk.yellow.bold(
-      `Server is running on port ${
+      `Server is running on ${
         process.env.NODE_ENV || "Production"
       } mode on port ${PORT}`
     )
