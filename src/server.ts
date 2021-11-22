@@ -3,11 +3,13 @@ import * as dotenv from "dotenv";
 import connectDB from "./Config/db";
 import morgan from "morgan";
 import chalk from "chalk";
+import job from "./Config/jobScheduler";
 
 const app = express();
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
+job.start();
 connectDB();
 dotenv.config();
 const PORT = process.env.PORT || 3000;
