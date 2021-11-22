@@ -4,6 +4,8 @@ import connectDB from "./Config/db";
 import morgan from "morgan";
 import chalk from "chalk";
 
+import router from "./Routes/routes";
+
 connectDB();
 dotenv.config();
 const PORT = process.env.PORT || 3000;
@@ -12,6 +14,7 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
+app.use("/", router);
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
