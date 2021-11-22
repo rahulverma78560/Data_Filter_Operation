@@ -3,6 +3,8 @@ import * as dotenv from "dotenv";
 import connectDB from "./Config/db";
 import morgan from "morgan";
 import chalk from "chalk";
+import routerMiddleware from './Routes/routes'
+
 
 const app = express();
 if (process.env.NODE_ENV === "development") {
@@ -10,11 +12,13 @@ if (process.env.NODE_ENV === "development") {
 }
 connectDB();
 dotenv.config();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
+const jsonParserMiddleware = express.json()
+
+app.use(jsonParserMiddleware)
+app.use(routerMiddleware)
+
 
 app.listen(PORT, () => {
   console.log(
