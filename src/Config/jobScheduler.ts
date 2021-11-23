@@ -7,12 +7,12 @@ export let autoPost = new CronJob(
       const { data } = await post(
         `http://localhost:${process.env.PORT || 3000}/rawCollection`
       );
-      console.log(
-        data,
-        ".....................Cron JOB.................This will be called in every 1 min"
-      );
+      // console.log(
+      //   data,
+      //   ".....................Cron JOB.................This will be called in every 4 min"
+      // );
     } catch (err) {
-      console.error("Error!");
+      console.error("Error!!!.......No Data Found.........");
     }
   },
   null,
@@ -21,7 +21,7 @@ export let autoPost = new CronJob(
 );
 
 export let autoDelete = new CronJob(
-  "*/10 * * * *",
+  "*/2 * * * *",
   async function () {
     try {
       const { data } = await del(
@@ -29,10 +29,10 @@ export let autoDelete = new CronJob(
       );
       console.log(
         data,
-        ".....................Cron JOB.................This will be called in every 1 min"
+        ".....................Cron JOB.................This will be called in every 10 min"
       );
     } catch (err) {
-      console.error("Error!");
+      console.error("Error!!!.......No Data Found.........");
     }
   },
   null,

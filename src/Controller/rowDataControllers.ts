@@ -6,7 +6,7 @@ import csvtojson from "csvtojson";
 const Raw_collection_db = Mongoose.model("Raw_collection_db", C1userSchema);
 
 export const postRawdata = (req: Request, res: Response) => {
-  Raw_collection_db.deleteMany().exec();
+  //Raw_collection_db.deleteMany().exec();
   csvtojson()
     .fromFile("Model-Sample-Data.csv")
     .then((csvData) => {
@@ -21,14 +21,15 @@ export const postRawdata = (req: Request, res: Response) => {
         });
       }
 
-      Raw_collection_db
-        .insertMany(csvData)
+      Raw_collection_db.insertMany(csvData)
         .then(function (data) {
           console.log("Data is inserted");
           res.json(data);
-          Raw_collection_db
-            .updateMany({}, { $set: {  isCleaned: 0 } }, { multi: true })
-            .exec();
+          Raw_collection_db.updateMany(
+            {},
+            { $set: { isCleaned: 0 } },
+            { multi: true }
+          ).exec();
         })
         .catch(function (err) {
           console.log(err);
@@ -36,26 +37,24 @@ export const postRawdata = (req: Request, res: Response) => {
     });
 };
 
-
 export const filterData = (req: Request, res: Response) => {
-  c2filter.deleteMany().exec();
-  Raw_collection_db
-    .aggregate([
-      {
-        $group: {
-          _id: {
-            Resource_Group: "$Resource_Group",
-            Subscription_Id: "$Subscription_Id",
-          },
-          Applicable_Estimated_Charges: {
-            $sum: { $toDouble: "$Applicable_Estimated_Charges" },
-          },
+  // c2filter.deleteMany().exec();
+  Raw_collection_db.aggregate([
+    {
+      $group: {
+        _id: {
+          Resource_Group: "$Resource_Group",
+          Subscription_Id: "$Subscription_Id",
+        },
+        Applicable_Estimated_Charges: {
+          $sum: { $toDouble: "$Applicable_Estimated_Charges" },
         },
       },
-    ])
+    },
+  ])
     .then(async (result) => {
       res.json(result);
-      res.status(200)
+      res.status(200);
       console.log(result);
       result.forEach((i) => {
         c2filter.insertMany([
@@ -65,12 +64,11 @@ export const filterData = (req: Request, res: Response) => {
             Applicable_Estimated_Charges: i.Applicable_Estimated_Charges,
           },
         ]);
-        Raw_collection_db.updateMany({}, {  isCleaned: 1 }).exec();
+        Raw_collection_db.updateMany({}, { isCleaned: 1 }).exec();
       });
     })
     .catch((error) => {
       console.log(error);
-      res.json(500)
+      res.json(500);
     });
 };
-
