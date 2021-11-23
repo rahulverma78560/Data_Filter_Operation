@@ -9,10 +9,10 @@ export let autoPost = new CronJob(
       );
       // console.log(
       //   data,
-      //   ".....................Cron JOB.................This will be called in every 4 min"
+      //   ".....................Cron JOB..................."
       // );
     } catch (err) {
-      console.error("Error!!!.......No Data Found.........");
+      console.error("..........No Data Found.........");
     }
   },
   null,
@@ -27,12 +27,9 @@ export let autoDelete = new CronJob(
       const { data } = await del(
         `http://localhost:${process.env.PORT || 3000}/delete`
       );
-      console.log(
-        data,
-        ".....................Cron JOB.................This will be called in every 10 min"
-      );
+      console.log(data, ".................Cron JOB.................");
     } catch (err) {
-      console.error("Error!!!.......No Data Found.........");
+      console.error("..........No Data Found.........");
     }
   },
   null,
