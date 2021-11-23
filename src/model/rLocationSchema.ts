@@ -4,15 +4,15 @@ import mongoose from "mongoose";
 const cl1 = new mongoose.Schema({ 
     isCleaned: {type: Number}
 });
-export let col1 = mongoose.model("db1", cl1);
+export let col1 = mongoose.model("c1datasets", cl1);
 
 // -----Collection 2 (insert records)-------------
 const cl2 = new mongoose.Schema({
-    SubscriptionID: { type: String },
-    resourseLocation: { type: String },
-    applicableEstimation: { type: Number },
+    Subscription_Id: { type: String },
+    Resource_Location: { type: String },
+    Applicable_Estimated_Charges: { type: Number },
 });
-export let col2 = mongoose.model("db2", cl2);
+export let col2 = mongoose.model("testings", cl2);
 
 
 
