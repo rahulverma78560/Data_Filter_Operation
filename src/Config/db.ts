@@ -5,7 +5,7 @@ const connectDB = async () => {
   try {
     const conn = await mongoose.connect(
       process.env.MONGO_URI ||
-        "mongodb+srv://G7CR:G7CR@cluster0.l5qv2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+        "mongodb+srv://G7CR:G7CR@cluster0.l5qv2.mongodb.net/dataFilter?retryWrites=true&w=majority"
     );
     console.log(
       chalk.blueBright.bold(
@@ -22,4 +22,6 @@ function handleError(error: unknown) {
   );
 }
 
+
 export default connectDB;
+
