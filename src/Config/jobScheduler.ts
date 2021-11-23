@@ -1,17 +1,8 @@
-import { get, post } from "httpie";
-// var curl = require("curl");
+import { del, post } from "httpie";
 var CronJob = require("cron").CronJob;
-var job = new CronJob(
-  "* * * * *",
+export let autoPost = new CronJob(
+  "*/4 * * * *",
   async function () {
-    // get("https://example.com/404").catch((err) => {
-    //   console.error(`(${err.statusCode}) ${err.message}`);
-    //   console.error(err.headers["content-type"]);
-    //   console.error(`~> ${err.data}`);
-    // });
-    // // curl.get("google.com", function (err: any, response: any, body: any) {});
-    // console.log("You will see this message every 1 min");
-    // console.log(curl);
     try {
       const { data } = await post(
         `http://localhost:${process.env.PORT || 3000}/addc1`
@@ -20,35 +11,31 @@ var job = new CronJob(
         data,
         ".....................Cron JOB.................This will be called in every 1 min"
       );
-      // Demo: Endpoint will echo what we've sent
-      // const res = await post("https://jsonplaceholder.typicode.com/posts", {
-      //   body: {
-      //     id: data.id,
-      //     name: data.name,
-      //     number: data.order,
-      //     moves: data.moves.slice(0, 6),
-      //   },
-      // });
-      // console.log(res.statusCode); //=> 201
-      // console.log(res.data); //=> { id: 1, name: 'bulbasaur', number: 1, moves: [{...}, {...}] }
     } catch (err) {
       console.error("Error!");
-      console.error("~> headers:");
-      console.error("~> data:");
     }
   },
   null,
   true,
   "Asia/Kolkata"
 );
-export default job;
 
-// const CronJob = require("cron").CronJob;
-
-// console.log("Before job instantiation");
-// const job = new CronJob("* 01 * * * *", function () {
-//   const d = new Date();
-//   console.log("At Ten Minutes:", d);
-// });
-// console.log("After job instantiation");
-// export default job;
+export let autoDelete = new CronJob(
+  "*/10 * * * *",
+  async function () {
+    try {
+      const { data } = await del(
+        `http://localhost:${process.env.PORT || 3000}/delete`
+      );
+      console.log(
+        data,
+        ".....................Cron JOB.................This will be called in every 1 min"
+      );
+    } catch (err) {
+      console.error("Error!");
+    }
+  },
+  null,
+  true,
+  "Asia/Kolkata"
+);
