@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addData, updateData } from "../Controller/updateControllers";
+import {  updateData } from "../Controller/updateControllers";
 import { filterData, postRawdata } from "../Controller/rowDataControllers";
 import { deleteController } from "../Controller/controllers";
 import { getFilterRecords } from "../Controller/filterController";
@@ -10,11 +10,9 @@ routerMiddleware.post("/groupCollection", filterData);
 
 routerMiddleware.post("/rawCollection", postRawdata);
 
-routerMiddleware.post("/postData", addData);
-
 routerMiddleware.post("/group", getFilterRecords);
 
-routerMiddleware.patch("/updateData/:SubscriptionID", updateData);
+routerMiddleware.patch("/updateData/:id", updateData);
 
 routerMiddleware.delete("/delete", deleteController);
 

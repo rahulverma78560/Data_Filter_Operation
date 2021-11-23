@@ -1,34 +1,24 @@
 // import { userSchema } from "../model/schema";
 import  * as Mongoose from "mongoose";
-import { c2userSchema } from "../model/Subs_Location_db";
+import { c2filter } from "../model/Subs_Location_db";
+import { col2 } from "../model/Subs_group_db";
 
 
 import { Request , Response } from "express";
+import { createResponse } from "../Utility/response";
 
-const c3 = Mongoose.model("c3", c2userSchema);
 
-export const addData = (req: Request, res: Response) => {
-  let c2Collection = new c3(req.body);
+export const updateData = async(req: Request, res: Response) => {
+  let col=await col2.findByIdAndUpdate(req.params.id, {
+    Applicable_Estimated_Charges: req.body.Applicable_Estimated_Charges
+  },
+  {new: true}) || await c2filter.findByIdAndUpdate(req.params.id, {
+    Applicable_Estimated_Charges: req.body.Applicable_Estimated_Charges
+  },
+  {new: true}) ;
 
-  console.log(c2Collection);
-  c2Collection.save((err: any, c2: any) => {
-    if (err) {
-      res.send(err);
-    }
-    res.json(c3);
-  });
-};
-
-export const updateData = (req: Request, res: Response) => {
-  c3.findOneAndUpdate(
-    { SubscriptionID: req.body.SubscriptionID },
-    req.body,
-    { new: true },
-    (err, c3) => {
-      if (err) {
-        res.send(err);
-      }
-      res.json(c3);
-    }
-  );
+  if(!col){
+    return res.status(404).json(createResponse(404,"Records not found"))
+  }
+  res.send(col)
 };
