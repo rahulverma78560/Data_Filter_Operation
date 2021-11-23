@@ -13,19 +13,24 @@ var job = new CronJob(
     // console.log("You will see this message every 1 min");
     // console.log(curl);
     try {
-      const { data } = await post(`http://localhost:3000/addc1`);
-      console.log(data, "/.........");
+      const { data } = await post(
+        `http://localhost:${process.env.PORT || 3000}/addc1`
+      );
+      console.log(
+        data,
+        ".....................Cron JOB.................This will be called in every 1 min"
+      );
       // Demo: Endpoint will echo what we've sent
-      const res = await post("https://jsonplaceholder.typicode.com/posts", {
-        body: {
-          id: data.id,
-          name: data.name,
-          number: data.order,
-          moves: data.moves.slice(0, 6),
-        },
-      });
-      console.log(res.statusCode); //=> 201
-      console.log(res.data); //=> { id: 1, name: 'bulbasaur', number: 1, moves: [{...}, {...}] }
+      // const res = await post("https://jsonplaceholder.typicode.com/posts", {
+      //   body: {
+      //     id: data.id,
+      //     name: data.name,
+      //     number: data.order,
+      //     moves: data.moves.slice(0, 6),
+      //   },
+      // });
+      // console.log(res.statusCode); //=> 201
+      // console.log(res.data); //=> { id: 1, name: 'bulbasaur', number: 1, moves: [{...}, {...}] }
     } catch (err) {
       console.error("Error!");
       console.error("~> headers:");
