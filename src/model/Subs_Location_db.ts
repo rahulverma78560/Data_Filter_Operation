@@ -13,4 +13,4 @@ export const c2userSchema = new Schema({
     }
 });
 
-export const c2filter= Mongoose.model('Subs_Location_db',c2userSchema)
+export const c2filter= Mongoose.model('Subs_location_db',c2userSchema)
