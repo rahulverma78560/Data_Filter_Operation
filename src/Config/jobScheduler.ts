@@ -13,7 +13,7 @@ var job = new CronJob(
     // console.log("You will see this message every 1 min");
     // console.log(curl);
     try {
-      const { data } = await get("https://facebook.com");
+      const { data } = await post(`http://localhost:3000/addc1`);
       console.log(data, "/.........");
       // Demo: Endpoint will echo what we've sent
       const res = await post("https://jsonplaceholder.typicode.com/posts", {
