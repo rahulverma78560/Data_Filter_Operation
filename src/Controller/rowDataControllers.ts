@@ -1,13 +1,13 @@
 import Mongoose from "mongoose";
 import { Request, Response } from "express";
-import { c2userSchema } from "../model/ce2 schema";
-import { C1userSchema } from "../model/ce1 schema";
+import { c2userSchema } from "../model/Subs_Location_db";
+import { C1userSchema } from "../model/Raw_collection_db";
 import csvtojson from "csvtojson";
-const cdatatests = Mongoose.model("cdatatests", c2userSchema);
-const c1datatests = Mongoose.model("C1dataset", C1userSchema);
+const Subs_Location_db = Mongoose.model("Subs_Location_db", c2userSchema);
+const Raw_collection_db = Mongoose.model("Raw_collection_db", C1userSchema);
 
-export const addc1 = (req: Request, res: Response) => {
-  c1datatests.deleteMany().exec();
+export const postRawdata = (req: Request, res: Response) => {
+  Raw_collection_db.deleteMany().exec();
   csvtojson()
     .fromFile("Model-Sample-Data.csv")
     .then((csvData) => {
@@ -22,12 +22,12 @@ export const addc1 = (req: Request, res: Response) => {
         });
       }
 
-      c1datatests
+      Raw_collection_db
         .insertMany(csvData)
         .then(function (data) {
           console.log("Data is inserted");
           res.json(data);
-          c1datatests
+          Raw_collection_db
             .updateMany({}, { $set: {  isCleaned: 0 } }, { multi: true })
             .exec();
         })
@@ -37,9 +37,9 @@ export const addc1 = (req: Request, res: Response) => {
     });
 };
 
-export const addc2 = (req: Request, res: Response) => {
-  cdatatests.deleteMany().exec();
-  c1datatests
+export const filterData = (req: Request, res: Response) => {
+  Subs_Location_db.deleteMany().exec();
+  Raw_collection_db
     .aggregate([
       {
         $group: {
@@ -55,19 +55,21 @@ export const addc2 = (req: Request, res: Response) => {
     ])
     .then(async (result) => {
       res.json(result);
+      res.json(200)
       console.log(result);
       result.forEach((i) => {
-        cdatatests.insertMany([
+        Subs_Location_db.insertMany([
           {
             Subscription_Id: i._id.Subscription_Id,
             Resource_Group: i._id.Resource_Group,
             Applicable_Estimated_Charges: i.Applicable_Estimated_Charges,
           },
         ]);
-        c1datatests.updateMany({}, {  isCleaned: 1 }).exec();
+        Raw_collection_db.updateMany({}, {  isCleaned: 1 }).exec();
       });
     })
     .catch((error) => {
       console.log(error);
+      res.status(500)
     });
 };
