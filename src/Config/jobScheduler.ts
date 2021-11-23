@@ -5,7 +5,7 @@ export let autoPost = new CronJob(
   async function () {
     try {
       const { data } = await post(
-        `http://localhost:${process.env.PORT || 3000}/addc1`
+        `http://localhost:${process.env.PORT || 3000}/rawCollection`
       );
       console.log(
         data,
