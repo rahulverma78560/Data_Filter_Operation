@@ -1,4 +1,4 @@
-import { addData, updateData } from "../Controller/controllers";
+import { addData, updateData } from "../Controller/updateControllers";
 import { addc1, addc2 } from "../Controller/rowDataControllers";
 
 import { Router } from "express";
