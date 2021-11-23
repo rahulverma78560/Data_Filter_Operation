@@ -3,8 +3,8 @@ import * as dotenv from "dotenv";
 import connectDB from "./Config/db";
 import morgan from "morgan";
 import chalk from "chalk";
-import { addc1, addc2 } from "./Controller/rowDataControllers";
 import job from "./Config/jobScheduler";
+import routerMiddleware from "./Routes/routes";
 
 const app = express();
 if (process.env.NODE_ENV === "development") {
@@ -13,9 +13,7 @@ if (process.env.NODE_ENV === "development") {
 
 const jsonParserMiddleware = express.json();
 app.use(jsonParserMiddleware);
-app.post("/addc3", addc2);
-app.post("/addc1", addc1);
-
+app.use(routerMiddleware);
 job.start();
 connectDB();
 dotenv.config();
