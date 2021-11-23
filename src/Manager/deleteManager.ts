@@ -1,4 +1,4 @@
-import { filter } from "../model/ce1 schema"
+import { filter } from "../model/Raw_collection_db"
 export const removeData = async()=>{
     const process =await filter.deleteMany({"isCleaned":1})
     if(process.deletedCount===0){

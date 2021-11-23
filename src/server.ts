@@ -3,7 +3,7 @@ import * as dotenv from "dotenv";
 import connectDB from "./Config/db";
 import morgan from "morgan";
 import chalk from "chalk";
-import job from "./Config/jobScheduler";
+import { autoPost, autoDelete } from "./Config/jobScheduler";
 import routerMiddleware from "./Routes/routes";
 
 const app = express();
@@ -14,7 +14,8 @@ if (process.env.NODE_ENV === "development") {
 const jsonParserMiddleware = express.json();
 app.use(jsonParserMiddleware);
 app.use(routerMiddleware);
-job.start();
+autoPost.start();
+autoDelete.start();
 connectDB();
 dotenv.config();
 const PORT = process.env.PORT || 3000;
