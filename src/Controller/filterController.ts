@@ -1,30 +1,28 @@
 import { Request, Response } from "express";
 import Mongoose from "mongoose";
 import { createResponse } from "../Utility/response";
-import {col2 } from "../model/Subs_group_db";
+import { col2 } from "../model/Subs_group_db";
 import { C1userSchema } from "../model/Raw_collection_db";
 const Raw_collection_db = Mongoose.model("Raw_collection_db", C1userSchema);
 
-
 export const getFilterRecords = (req: Request, res: Response) => {
-  col2.deleteMany().exec();
-  Raw_collection_db
-    .aggregate([
-      {
-        $group: {
-          _id: {
-            Resource_Location: "$Resource_Location",
-            Subscription_Id: "$Subscription_Id",
-          },
-          Applicable_Estimated_Charges: {
-            $sum: { $toDouble: "$Applicable_Estimated_Charges" },
-          },
+  //   col2.deleteMany().exec();
+  Raw_collection_db.aggregate([
+    {
+      $group: {
+        _id: {
+          Resource_Location: "$Resource_Location",
+          Subscription_Id: "$Subscription_Id",
+        },
+        Applicable_Estimated_Charges: {
+          $sum: { $toDouble: "$Applicable_Estimated_Charges" },
         },
       },
-    ])
+    },
+  ])
     .then(async (result) => {
       res.json(result);
-      res.status(200)
+      res.status(200);
       console.log(result);
       result.forEach((i) => {
         col2.insertMany([
@@ -34,13 +32,11 @@ export const getFilterRecords = (req: Request, res: Response) => {
             Applicable_Estimated_Charges: i.Applicable_Estimated_Charges,
           },
         ]);
-        Raw_collection_db.updateMany({}, {  isCleaned: 1 }).exec();
+        Raw_collection_db.updateMany({}, { isCleaned: 1 }).exec();
       });
     })
     .catch((error) => {
       console.log(error);
-      res.json(500)
+      res.json(500);
     });
 };
-
-
