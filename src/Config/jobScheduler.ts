@@ -1,5 +1,5 @@
 import { get, post } from "httpie";
-var curl = require("curl");
+// var curl = require("curl");
 var CronJob = require("cron").CronJob;
 var job = new CronJob(
   "* * * * *",
