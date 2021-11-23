@@ -9,6 +9,9 @@ import { createResponse } from "../Utility/response";
 
 
 export const updateData = async(req: Request, res: Response) => {
+  if(!req.body.Applicable_Estimated_Charges){
+    return res.send('Cannot Modify')
+  }
   let col=await col2.findByIdAndUpdate(req.params.id, {
     Applicable_Estimated_Charges: req.body.Applicable_Estimated_Charges
   },
