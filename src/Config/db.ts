@@ -5,7 +5,7 @@ const connectDB = async () => {
   try {
     const conn = await mongoose.connect(
       process.env.MONGO_URI ||
-        "mongodb+srv://G7CR:G7CR@cluster0.l5qv2.mongodb.net/FiltrationB?retryWrites=true&w=majority"
+        "mongodb+srv://G7CR:G7CR@cluster0.l5qv2.mongodb.net/dataFilteration?retryWrites=true&w=majority"
     );
     console.log(
       chalk.blueBright.bold(
