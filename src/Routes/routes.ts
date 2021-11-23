@@ -6,13 +6,15 @@ import { getFilterRecords } from "../Controller/filterController";
 
 const routerMiddleware = Router();
 
-routerMiddleware.post("/groupCollection", filterData);
+
 
 routerMiddleware.post("/rawCollection", postRawdata);
 
 routerMiddleware.post("/postData", addData);
 
 routerMiddleware.post("/group", getFilterRecords);
+
+routerMiddleware.post("/groupCollection", filterData);
 
 routerMiddleware.patch("/updateData/:SubscriptionID", updateData);
 
