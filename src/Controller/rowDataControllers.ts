@@ -28,7 +28,7 @@ export const addc1 = (req: Request, res: Response) => {
           console.log("Data is inserted");
           res.json(data);
           c1datatests
-            .updateMany({}, { $set: { isprocess: 0 } }, { multi: true })
+            .updateMany({}, { $set: {  isCleaned: 0 } }, { multi: true })
             .exec();
         })
         .catch(function (err) {
@@ -64,7 +64,7 @@ export const addc2 = (req: Request, res: Response) => {
             Applicable_Estimated_Charges: i.Applicable_Estimated_Charges,
           },
         ]);
-        c1datatests.updateMany({}, { isprocess: 1 }).exec();
+        c1datatests.updateMany({}, {  isCleaned: 1 }).exec();
       });
     })
     .catch((error) => {
