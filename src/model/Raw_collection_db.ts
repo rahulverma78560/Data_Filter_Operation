@@ -68,7 +68,7 @@ export const C1userSchema = new Schema({
     }
 });
 
-export const filter= Mongoose.model('C1dataset',C1userSchema)
+export const filter= Mongoose.model('Raw_collection_db',C1userSchema)
 
 
 

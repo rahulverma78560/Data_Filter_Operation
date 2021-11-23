@@ -1,10 +1,11 @@
 // import { userSchema } from "../model/schema";
-import Mongoose from "mongoose";
-import { userSchema } from "../model/BiniSchema";
+import  * as Mongoose from "mongoose";
+import { c2userSchema } from "../model/Subs_Location_db";
 
-import { Request, Response } from "express";
 
-const c3 = Mongoose.model("c3", userSchema);
+import { Request , Response } from "express";
+
+const c3 = Mongoose.model("c3", c2userSchema);
 
 export const addData = (req: Request, res: Response) => {
   let c2Collection = new c3(req.body);

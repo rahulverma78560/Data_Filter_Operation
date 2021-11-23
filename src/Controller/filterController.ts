@@ -1,17 +1,20 @@
 import { Request, Response } from "express";
-import { col1, col2 } from "../model/rLocationSchema";
+import Mongoose from "mongoose";
 import { createResponse } from "../Utility/response";
+import {col2 } from "../model/Subs_group_db";
+import { C1userSchema } from "../model/Raw_collection_db";
+const Raw_collection_db = Mongoose.model("Raw_collection_db", C1userSchema);
 
-export const getFilterRecords = async (req: Request, res: Response) => {
-  await col2.deleteMany({}).exec();
-  col1
+
+export const getFilterRecords = (req: Request, res: Response) => {
+  col2.deleteMany().exec();
+  Raw_collection_db
     .aggregate([
       {
         $group: {
-          // "$Subscription_ID"  "$Resource_Location"
           _id: {
-            Subscription_Id: "$Subscription_Id",
             Resource_Location: "$Resource_Location",
+            Subscription_Id: "$Subscription_Id",
           },
           Applicable_Estimated_Charges: {
             $sum: { $toDouble: "$Applicable_Estimated_Charges" },
@@ -19,31 +22,25 @@ export const getFilterRecords = async (req: Request, res: Response) => {
         },
       },
     ])
-    .exec()
-    .then((results) => {
-      results.forEach((sData) => {
+    .then(async (result) => {
+      res.json(result);
+      res.status(200)
+      console.log(result);
+      result.forEach((i) => {
         col2.insertMany([
           {
-            Subscription_Id: sData._id.Subscription_Id,
-            Resource_Location: sData._id.Resource_Location,
-            Applicable_Estimated_Charges: sData.Applicable_Estimated_Charges,
+            Subscription_Id: i._id.Subscription_Id,
+            Resource_Location: i._id.Resource_Location,
+            Applicable_Estimated_Charges: i.Applicable_Estimated_Charges,
           },
         ]);
-
-        const filter = {
-          Subscription_ID: sData._id.Subscription_ID,
-          Resource_Location: sData._id.Resource_Location,
-        };
-
-        col1.updateMany(filter, { isCleaned: 1 }).exec();
+        Raw_collection_db.updateMany({}, {  isCleaned: 1 }).exec();
       });
-      return res
-        .status(200)
-        .json(
-          createResponse(200, "Records Grouped and Save to DB successfully")
-        );
     })
-    .catch((err) => {
-      res.status(500).json(createResponse(500, err));
+    .catch((error) => {
+      console.log(error);
+      res.json(500)
     });
 };
+
+
