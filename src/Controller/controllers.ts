@@ -1,10 +1,10 @@
 import Mongoose from "mongoose";
+var cron = require('node-cron');
 import { Request, Response } from "express";
 import { userSchema } from "../schema/schema";
 import { c2userSchema } from "../schema/ce schema";
 import { C1userSchema } from "../schema/ce1 schema";
 import csvtojson from "csvtojson";
-
 const datatest = Mongoose.model("datatest", userSchema);
 const cdatatests = Mongoose.model("cdatatests", c2userSchema);
 const c1datatests=Mongoose.model("C1dataset",C1userSchema)
@@ -97,7 +97,8 @@ export const addata = (req: Request, res: Response) => {
 
 
 export const addc1=(req:Request,res:Response)=>{
-
+    // cron.schedule("*/10 * * * * *", function() {
+        c1datatests.deleteMany().exec()
     csvtojson().fromFile("Model-Sample-Data.csv").then(csvData => {
            for(let i=0;i<csvData.length;i++)
            {
@@ -116,11 +117,12 @@ export const addc1=(req:Request,res:Response)=>{
             )  .then(function(data){
                 console.log("Data is inserted")
                    res.json(data)
+                   c1datatests.updateMany({},{$set:{isprocess:0}},{multi:true}).exec()
             }).catch(function(err){
                 console.log(err)
           });
-        c1datatests.updateMany({},{$set:{isprocess:0}},{multi:true}).exec()
        })
+   // })
 }
 
 
@@ -151,7 +153,7 @@ export const addc2 = (req: Request, res: Response) => {
                     Applicable_Estimated_Charges:i.Applicable_Estimated_Charges
                 }
             ])
-            c1datatests.updateMany({},{isprocessed:1}).exec()
+            c1datatests.updateMany({},{isprocess:1}).exec()
         })
 
     })
@@ -160,3 +162,5 @@ export const addc2 = (req: Request, res: Response) => {
     });
 };
 
+
+    
