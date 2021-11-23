@@ -3,7 +3,7 @@ import * as dotenv from "dotenv";
 import connectDB from "./Config/db";
 import morgan from "morgan";
 import chalk from "chalk";
-import { addc1, addc2 } from "./Controller/controllers";
+import { addc1, addc2 } from "./Controller/rowDataControllers";
 import job from "./Config/jobScheduler";
 
 const app = express();
