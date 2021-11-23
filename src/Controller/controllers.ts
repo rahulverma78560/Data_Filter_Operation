@@ -8,30 +8,30 @@ export const getFilterRecords = async (req:Request, res:Response) => {
     
     let total = 0;
     col1.aggregate([
-        { $group: {   // "$SubscriptionID"  "$resourseLocation"
-            _id: { SubscriptionID :"$SubscriptionID", resourseLocation:"$resourseLocation" },
-            applicableEstimation: { $sum: {$toDouble: '$applicableEstimation' } } 
+        { $group: {   // "$Subscription_ID"  "$Resource_Location"
+            _id: { Subscription_Id:"$Subscription_Id", Resource_Location:"$Resource_Location" },
+            Applicable_Estimated_Charges: { $sum: {$toDouble: '$Applicable_Estimated_Charges' } } 
         } }
      ])
       .exec()
       .then( (results) => { 
            results.forEach ( 
-               (sData) => { 
+               (sData) => { console.log(sData.Applicable_Estimate)
                 col2.insertMany([
                     { 
-                        SubscriptionID: sData._id.SubscriptionID, 
-                        resourseLocation: sData._id.resourseLocation,
-                        applicableEstimation: sData.applicableEstimation
+                        Subscription_Id: sData._id.Subscription_Id, 
+                        Resource_Location: sData._id.Resource_Location,
+                        Applicable_Estimated_Charges: sData.Applicable_Estimated_Charges
                      }             
                 ])
 
                 const filter = {
-                    SubscriptionID: sData._id.SubscriptionID, 
-                    resourseLocation: sData._id.resourseLocation,
+                    Subscription_ID: sData._id.Subscription_ID, 
+                    Resource_Location: sData._id.Resource_Location,
                 }
 
                  col1.updateMany(filter, {isCleaned : 1}).exec();
-                //  col1.updateMany(filter, {$unset: {isprocess: 1}}, {multi: true}).exec();
+                
                }
            )
          return res.status(200).json(createResponse(200, "Records Grouped and Save to DB successfully"))
@@ -40,3 +40,5 @@ export const getFilterRecords = async (req:Request, res:Response) => {
           res.status(500).json(createResponse(500, err));
       })
 }
+
+ 
