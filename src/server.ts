@@ -2,22 +2,17 @@ import express from "express";
 import * as dotenv from "dotenv";
 import connectDB from "./Config/db";
 import morgan from "morgan";
-var cron = require('node-cron');
 import chalk from "chalk";
-import { addata, addc1, addc2} from "./Controller/controllers";
+import { addc1, addc2 } from "./Controller/controllers";
 const app = express();
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
-} 
+}
 
-const jsonParserMiddleware=express.json()
-app.use(jsonParserMiddleware)
-app.post("/",addata)
-app.post("/addc3",addc2)
-
-app.post("/addc1",addc1)
-
-
+const jsonParserMiddleware = express.json();
+app.use(jsonParserMiddleware);
+app.post("/addc3", addc2);
+app.post("/addc1", addc1);
 
 connectDB();
 dotenv.config();
