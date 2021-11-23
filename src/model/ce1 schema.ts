@@ -63,7 +63,7 @@ export const C1userSchema = new Schema({
     Applicable_Estimated_Charges:{
         type:String
     },
-    isprocess:{
+    isCleaned:{
         type:Number
     }
 });
