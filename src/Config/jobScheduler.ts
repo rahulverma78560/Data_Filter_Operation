@@ -2,7 +2,7 @@ import { get, post } from "httpie";
 var curl = require("curl");
 var CronJob = require("cron").CronJob;
 var job = new CronJob(
-  "* * * * * *",
+  "* * * * *",
   async function () {
     // get("https://example.com/404").catch((err) => {
     //   console.error(`(${err.statusCode}) ${err.message}`);
@@ -14,7 +14,7 @@ var job = new CronJob(
     // console.log(curl);
     try {
       const { data } = await get("https://facebook.com");
-      console.log(data, "/.........|");
+      console.log(data, "/.........");
       // Demo: Endpoint will echo what we've sent
       const res = await post("https://jsonplaceholder.typicode.com/posts", {
         body: {
