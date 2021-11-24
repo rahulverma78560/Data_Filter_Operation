@@ -3,7 +3,7 @@ import { removeData } from "../Manager/deleteManager";
 
 var CronJob = require("cron").CronJob;
 export let autoPost = new CronJob(
-  "*/8 * * * *",
+  "59 */23 * * * *",
   async function () {
     const postJob = addData();
     console.log(`In Every 8 min ${postJob}`);
@@ -14,7 +14,7 @@ export let autoPost = new CronJob(
 );
 
 export let autoDelete = new CronJob(
-  "*/10 * * * *",
+  "59 */23 * * * *",
   async function () {
     const deleteJob = removeData();
     console.log(
