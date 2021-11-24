@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { updateDataHandller } from "../Controller/updateControllers";
-import { postRawdata } from "../Controller/rawDataControllers";
-import { filterData } from "../Controller/subGroupFilterationController";
-import { deleteController } from "../Controller/deleteControllers";
+import { updateDataHandller } from "../Controller/updateController";
+import { postRawdata } from "../Controller/rawDataController";
+import { filterData } from "../Controller/subGroupController";
+import { deleteController } from "../Controller/deleteController";
 import { getFilterRecords } from "../Controller/subLocationController";
 
 const routerMiddleware = Router();
