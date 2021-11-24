@@ -1,19 +1,12 @@
-import { del, post } from "httpie";
+import { addData } from "../Manager/rawDataManager";
+import { removeData } from "../Manager/deleteManager";
+
 var CronJob = require("cron").CronJob;
 export let autoPost = new CronJob(
-  "*/4 * * * *",
+  "*/8 * * * *",
   async function () {
-    try {
-      const { data } = await post(
-        `http://localhost:${process.env.PORT || 3000}/rawCollection`
-      );
-      // console.log(
-      //   data,
-      //   ".....................Cron JOB..................."
-      // );
-    } catch (err) {
-      console.error("..........No Data Found.........");
-    }
+    const postJob = addData();
+    console.log(`In Every 8 min ${postJob}`);
   },
   null,
   true,
@@ -21,16 +14,12 @@ export let autoPost = new CronJob(
 );
 
 export let autoDelete = new CronJob(
-  "*/2 * * * *",
+  "*/10 * * * *",
   async function () {
-    try {
-      const { data } = await del(
-        `http://localhost:${process.env.PORT || 3000}/deleteData`
-      );
-      console.log(data, ".................Cron JOB.................");
-    } catch (err) {
-      console.error("..........No Data Found.........");
-    }
+    const deleteJob = removeData();
+    console.log(
+      `Is Cleaned data is deleted from the Raw Collection${deleteJob} in every 10 min`
+    );
   },
   null,
   true,
