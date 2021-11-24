@@ -1,5 +1,5 @@
 import { filter } from "../model/Raw_collection_db";
-import { c2filter } from "../model/Subs_Location_db";
+import { c2filter } from "../model/Subs_group_db";
 
 
 export const filteration=async()=>{

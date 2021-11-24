@@ -1,4 +1,4 @@
-import { col2 } from "../model/Subs_group_db";
+import { col2 } from "../model/Subs_location_db";
 import { filter } from "../model/Raw_collection_db";
 
 

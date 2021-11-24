@@ -1,16 +1,10 @@
-import *as Mongoose from "mongoose";
-const {Schema}=Mongoose
-export const c2userSchema = new Schema({
-    
-        Subscription_Id:{
-            type: String,
-        },
-        Resource_Group:{
-        type: String,
-        },
-        Applicable_Estimated_Charges:{
-        type:Number,
-    }
+import mongoose from "mongoose";
+const cl2 = new mongoose.Schema({
+    Subscription_Id: { type: String },
+    Resource_Location: { type: String },
+    Applicable_Estimated_Charges: { type: Number },
 });
+export let col2 = mongoose.model(" Subs_location_db", cl2);
 
-export const c2filter= Mongoose.model('Subs_location_db',c2userSchema)
+
+

@@ -1,5 +1,5 @@
-import { col2 } from "../model/Subs_group_db";
-import { c2filter } from "../model/Subs_Location_db";
+import { col2 } from "../model/Subs_location_db";
+import { c2filter } from "../model/Subs_group_db";
 
 export const updateData = async(Data:any, id:string, Applicable_Estimated_Charges:number)=>{
     if(!Applicable_Estimated_Charges){
