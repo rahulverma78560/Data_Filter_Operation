@@ -25,7 +25,7 @@ export let autoDelete = new CronJob(
   async function () {
     try {
       const { data } = await del(
-        `http://localhost:${process.env.PORT || 3000}/delete`
+        `http://localhost:${process.env.PORT || 3000}/deleteData`
       );
       console.log(data, ".................Cron JOB.................");
     } catch (err) {

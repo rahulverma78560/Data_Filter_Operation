@@ -1,6 +1,5 @@
-import *as Mongoose from "mongoose";
-const {Schema}=Mongoose
-export const c2userSchema = new Schema({
+import *as mongoose from "mongoose";
+export const c2Schema = new mongoose.Schema({
     
         Subscription_Id:{
             type: String,
@@ -13,4 +12,4 @@ export const c2userSchema = new Schema({
     }
 });
 
-export const c2filter= Mongoose.model('Subs_group_db',c2userSchema)
+export const groupCollection= mongoose.model('groupCollection',c2Schema)

@@ -1,34 +1,34 @@
-import { col2 } from "../model/Subs_location_db";
-import { filter } from "../model/Raw_collection_db";
+import { locationCollection } from "../model/Subs_Location_Schema";
+import { rawCollection } from "../model/Raw_collection_Schema";
 
 
-export const locationfilterationmanager=async()=>{
-    const filterresult=grouplocation().then(async (result) => {
+export const groupByLocation=async()=>{
+    const group=grouplocation().then(async (result) => {
         result.forEach((i) => {
-          col2.insertMany([
+          locationCollection.insertMany([
             {
               Subscription_Id: i._id.Subscription_Id,
               Resource_Location: i._id.Resource_Location,
               Applicable_Estimated_Charges: i.Applicable_Estimated_Charges,
             },
           ]);
-          filter.updateMany({}, { isCleaned: 1 }).exec();
+          rawCollection.updateMany({}, { isCleaned: 1 }).exec();
         });
       })
       .catch((error) => {
         console.log(error);
       });
-      if (!filterresult) {
-          return Promise.reject("Data not updated");
+      if (!group) {
+          return Promise.reject("Data not grouped");
         } else {
-          return Promise.resolve("Data Posted");
+          return Promise.resolve("Data Grouped");
         }
 }
 
 
 function grouplocation()
 {
-    const locationfilter= filter
+    const locationfilter= rawCollection
     .aggregate([
       {
         $group: {

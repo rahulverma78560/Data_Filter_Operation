@@ -1,8 +1,8 @@
-import { filter } from "../model/Raw_collection_db";
+import { rawCollection } from "../model/Raw_collection_Schema";
 import csvtojson from "csvtojson";
 
-export const sendData = () => {
-  let success = csvtojson()
+export const addData = () => {
+  let add = csvtojson()
     .fromFile("Model-Sample-Data.csv")
     .then((csvData) => {
       for (let i = 0; i < csvData.length; i++) {
@@ -15,10 +15,10 @@ export const sendData = () => {
           }
         });
       }
-      filter
+      rawCollection
         .insertMany(csvData)
         .then(function () {
-          filter
+          rawCollection
             .updateMany({}, { $set: { isCleaned: 0 } }, { multi: true })
             .exec();
         })
@@ -26,8 +26,8 @@ export const sendData = () => {
           console.log(err);
         });
     });
-  if (!success) {
-    return Promise.reject("Data not updated");
+  if (!add) {
+    return Promise.reject("Data not Posted");
   } else {
     return Promise.resolve("Data Posted");
   }

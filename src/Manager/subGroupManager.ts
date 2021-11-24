@@ -1,26 +1,26 @@
-import { filter } from "../model/Raw_collection_db";
-import { c2filter } from "../model/Subs_group_db";
+import { rawCollection } from "../model/Raw_collection_Schema";
+import { groupCollection } from "../model/Subs_group_Schema";
 
 
-export const filteration=async()=>{
-    const groupData=aggregateData().then(async (result) => {
+export const groupData=async()=>{
+    const group=aggregateData().then(async (result) => {
             result.forEach((i) => {
-           c2filter.insertMany([
+              groupCollection.insertMany([
              {
                Subscription_Id: i._id.Subscription_Id,
                Resource_Group: i._id.Resource_Group,
                Applicable_Estimated_Charges: i.Applicable_Estimated_Charges,
              },
            ]);
-           filter.updateMany({}, { isCleaned: 1 }).exec();
+           rawCollection.updateMany({}, { isCleaned: 1 }).exec();
          });
        }).catch((error) => {
          console.log(error)
        });
-       if (!groupData) {
-           return Promise.reject("Data not updated");
+       if (!group) {
+           return Promise.reject("Data not Grouped");
          } else {
-           return Promise.resolve("Data Posted");
+           return Promise.resolve("Data Grouped");
          }
    }
    
@@ -28,7 +28,7 @@ export const filteration=async()=>{
    
   
    function aggregateData(){
-    const dataFiltering=filter
+    const dataFiltering=rawCollection
        .aggregate([
          {
            $group: {

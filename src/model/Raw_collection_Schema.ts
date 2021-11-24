@@ -1,6 +1,5 @@
-import *as Mongoose from "mongoose";
-const {Schema}=Mongoose
-export const C1userSchema = new Schema({
+import *as mongoose from "mongoose";
+export const c1Schema = new mongoose.Schema({
     customer_Name:{
         type:String
     },
@@ -68,7 +67,7 @@ export const C1userSchema = new Schema({
     }
 });
 
-export const filter= Mongoose.model('Raw_collection_db',C1userSchema)
+export const rawCollection= mongoose.model('rawCollection',c1Schema)
 
 
 

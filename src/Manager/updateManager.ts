@@ -1,19 +1,19 @@
-import { col2 } from "../model/Subs_location_db";
-import { c2filter } from "../model/Subs_group_db";
+import { locationCollection } from "../model/Subs_Location_Schema";
+import { groupCollection } from "../model/Subs_group_Schema";
 
 export const updateData = async(Data:any, id:string, Applicable_Estimated_Charges:number)=>{
     if(!Applicable_Estimated_Charges){
-        return Promise.reject("Cannot Modify")
+        return Promise.reject("Cannot Modify the requested field")
       }
-      let col=await col2.findByIdAndUpdate(id, {
+      let update=await locationCollection.findByIdAndUpdate(id, {
         Applicable_Estimated_Charges: Data.Applicable_Estimated_Charges
       },
-      {new: true})  || await c2filter.findByIdAndUpdate(id, {
+      {new: true})  || await groupCollection.findByIdAndUpdate(id, {
         Applicable_Estimated_Charges: Data.Applicable_Estimated_Charges
       },
       {new: true})
-    if(!col){
-        return Promise.reject('Record Not Found')
+    if(!update){
+        return Promise.reject('Data not Updated')
     }
     else{
         return Promise.resolve("Updated Successfully")
