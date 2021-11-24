@@ -10,7 +10,6 @@ const app = express();
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
-
 const jsonParserMiddleware = express.json();
 app.use(jsonParserMiddleware);
 app.use(routerMiddleware);
@@ -19,6 +18,11 @@ autoDelete.start();
 connectDB();
 dotenv.config();
 const PORT = process.env.PORT || 3000;
+
+app.get("/", (req, res) => {
+  res.send(">>>>>>>>>>>> DataFilteration <<<<<<<<<<<<<");
+});
+
 app.listen(PORT, () => {
   console.log(
     chalk.yellow.bold(
