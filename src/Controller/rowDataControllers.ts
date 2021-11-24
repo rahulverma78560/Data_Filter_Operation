@@ -1,9 +1,9 @@
-import Mongoose from "mongoose";
+// import Mongoose from "mongoose";
 import { Request, Response } from "express";
 import { c2filter } from "../model/Subs_Location_db";
-import { C1userSchema } from "../model/Raw_collection_db";
+import { filter } from "../model/Raw_collection_db";
 import csvtojson from "csvtojson";
-const Raw_collection_db = Mongoose.model("Raw_collection_db", C1userSchema);
+// const Raw_collection_db = Mongoose.model("Raw_collection_db", C1userSchema);
 
 export const postRawdata = (req: Request, res: Response) => {
   //Raw_collection_db.deleteMany().exec();
@@ -21,15 +21,14 @@ export const postRawdata = (req: Request, res: Response) => {
         });
       }
 
-      Raw_collection_db.insertMany(csvData)
+      filter
+        .insertMany(csvData)
         .then(function (data) {
           console.log("Data is inserted");
           res.json(data);
-          Raw_collection_db.updateMany(
-            {},
-            { $set: { isCleaned: 0 } },
-            { multi: true }
-          ).exec();
+          filter
+            .updateMany({}, { $set: { isCleaned: 0 } }, { multi: true })
+            .exec();
         })
         .catch(function (err) {
           console.log(err);
@@ -39,19 +38,20 @@ export const postRawdata = (req: Request, res: Response) => {
 
 export const filterData = (req: Request, res: Response) => {
   // c2filter.deleteMany().exec();
-  Raw_collection_db.aggregate([
-    {
-      $group: {
-        _id: {
-          Resource_Group: "$Resource_Group",
-          Subscription_Id: "$Subscription_Id",
-        },
-        Applicable_Estimated_Charges: {
-          $sum: { $toDouble: "$Applicable_Estimated_Charges" },
+  filter
+    .aggregate([
+      {
+        $group: {
+          _id: {
+            Resource_Group: "$Resource_Group",
+            Subscription_Id: "$Subscription_Id",
+          },
+          Applicable_Estimated_Charges: {
+            $sum: { $toDouble: "$Applicable_Estimated_Charges" },
+          },
         },
       },
-    },
-  ])
+    ])
     .then(async (result) => {
       res.json(result);
       res.status(200);
@@ -64,7 +64,7 @@ export const filterData = (req: Request, res: Response) => {
             Applicable_Estimated_Charges: i.Applicable_Estimated_Charges,
           },
         ]);
-        Raw_collection_db.updateMany({}, { isCleaned: 1 }).exec();
+        filter.updateMany({}, { isCleaned: 1 }).exec();
       });
     })
     .catch((error) => {
