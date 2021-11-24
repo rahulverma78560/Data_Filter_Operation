@@ -44,3 +44,24 @@ function grouplocation()
     ])
     return locationfilter
 }
+
+
+export function locationresult()
+{
+    const locationfilter= rawCollection
+    .aggregate([
+      {
+        $group: {
+          _id: {
+            Resource_Location: "$Resource_Location",
+            Subscription_Id: "$Subscription_Id",
+          },
+          Applicable_Estimated_Charges: {
+            $sum: { $toDouble: "$Applicable_Estimated_Charges" },
+          },
+        },
+      },
+    ])
+    return locationfilter
+}
+

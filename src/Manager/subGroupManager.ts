@@ -23,11 +23,26 @@ export const groupData=async()=>{
            return Promise.resolve("Data Grouped");
          }
    }
-   
-
-   
   
    function aggregateData(){
+    const dataFiltering=rawCollection
+       .aggregate([
+         {
+           $group: {
+             _id: {
+               Resource_Group: "$Resource_Group",
+               Subscription_Id: "$Subscription_Id",
+             },
+             Applicable_Estimated_Charges: {
+               $sum: { $toDouble: "$Applicable_Estimated_Charges" },
+             },
+           },
+         },
+       ])
+       return dataFiltering
+   }
+
+  export function resultdata(){
     const dataFiltering=rawCollection
        .aggregate([
          {
