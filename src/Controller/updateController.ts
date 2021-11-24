@@ -11,6 +11,6 @@ export const updateDataHandller = async (req: Request, res: Response) => {
       return res.status(201).json(createResponse(201, "Data Updated Successfully"));
     })
     .catch((err) => {
-      return res.status(400).json(createResponse(400, err));
+      return res.status(400).json(createResponse(400, err="Invalid Id !!!!!!!"));
     });
 };
