@@ -9,9 +9,9 @@ const routerMiddleware = Router();
 
 routerMiddleware.post("/rawCollection", addDataHandler);
 
-routerMiddleware.post("/location", groupByLocationHandler);
+routerMiddleware.get("/location", groupByLocationHandler);
 
-routerMiddleware.post("/group", groupDataHandler);
+routerMiddleware.get("/group", groupDataHandler);
 
 routerMiddleware.patch("/updateData/:id", updateDataHandller);
 
