@@ -3,10 +3,10 @@ import { removeData } from "../Manager/deleteManager";
 
 var CronJob = require("cron").CronJob;
 export let autoPost = new CronJob(
-  "59 */23 * * * *",
+  "*/08 * * * *",
   async function () {
     const postJob = addData();
-    console.log(`In Every 8 min ${postJob}`);
+    console.log(`Post API is runnung in  Every 8 min ${postJob}`);
   },
   null,
   true,
@@ -14,12 +14,10 @@ export let autoPost = new CronJob(
 );
 
 export let autoDelete = new CronJob(
-  "59 */23 * * * *",
+  "*/10 * * * *",
   async function () {
     const deleteJob = removeData();
-    console.log(
-      `Is Cleaned data is deleted from the Raw Collection${deleteJob} in every 10 min`
-    );
+    console.log(`Delete API is runnig in  every 10 min`);
   },
   null,
   true,
