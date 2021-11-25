@@ -14,7 +14,7 @@ routerMiddleware.get("/location", groupByLocationHandler);
 
 routerMiddleware.get("/group", groupDataHandler);
 
-routerMiddleware.get("/get/:name", downloadDataHandler);
+routerMiddleware.get("/:name", downloadDataHandler);
 
 routerMiddleware.patch("/updateData/:id", updateDataHandller);
 
