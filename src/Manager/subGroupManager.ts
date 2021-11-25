@@ -3,6 +3,7 @@ import { groupCollection } from "../model/Subs_group_Schema";
 
 
 export const groupData=async()=>{
+  let data =await aggregateData().exec()
     const group=aggregateData().then(async (result) => {
             result.forEach((i) => {
               groupCollection.insertMany([
@@ -20,7 +21,7 @@ export const groupData=async()=>{
        if (!group) {
            return Promise.reject("Data not Grouped");
          } else {
-           return Promise.resolve("Data Grouped");
+           return Promise.resolve(data);
          }
    }
   
@@ -42,20 +43,4 @@ export const groupData=async()=>{
        return dataFiltering
    }
 
-  export function resultdata(){
-    const dataFiltering=rawCollection
-       .aggregate([
-         {
-           $group: {
-             _id: {
-               Resource_Group: "$Resource_Group",
-               Subscription_Id: "$Subscription_Id",
-             },
-             Applicable_Estimated_Charges: {
-               $sum: { $toDouble: "$Applicable_Estimated_Charges" },
-             },
-           },
-         },
-       ])
-       return dataFiltering
-   }
+ 
