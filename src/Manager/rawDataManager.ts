@@ -17,12 +17,12 @@ export const addData = () => {
       }
       rawCollection
         .insertMany(csvData)
-        .then(function () {
+        .then(()=> {
           rawCollection
             .updateMany({}, { $set: { isCleaned: 0 } }, { multi: true })
             .exec();
         })
-        .catch(function (err) {
+        .catch((err)=> {
           console.log(err);
         });
     });
