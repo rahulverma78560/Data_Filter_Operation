@@ -20,7 +20,7 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 
 app.get("/", (req, res) => {
-  res.send(">>>>>>>>>>>> DataFilteration <<<<<<<<<<<<<");
+  res.sendFile("index.html", { root: __dirname });
 });
 
 app.listen(PORT, () => {
