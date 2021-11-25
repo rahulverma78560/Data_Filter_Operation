@@ -3,6 +3,7 @@ import { rawCollection } from "../model/Raw_collection_Schema";
 
 
 export const groupByLocation=async()=>{
+  const data=await grouplocation().exec()
     const group=grouplocation().then(async (result) => {
         result.forEach((i) => {
           locationCollection.insertMany([
@@ -21,7 +22,7 @@ export const groupByLocation=async()=>{
       if (!group) {
           return Promise.reject("Data not grouped");
         } else {
-          return Promise.resolve("Data Grouped");
+          return Promise.resolve(data);
         }
 }
 
@@ -46,22 +47,4 @@ function grouplocation()
 }
 
 
-export function locationresult()
-{
-    const locationfilter= rawCollection
-    .aggregate([
-      {
-        $group: {
-          _id: {
-            Resource_Location: "$Resource_Location",
-            Subscription_Id: "$Subscription_Id",
-          },
-          Applicable_Estimated_Charges: {
-            $sum: { $toDouble: "$Applicable_Estimated_Charges" },
-          },
-        },
-      },
-    ])
-    return locationfilter
-}
 
