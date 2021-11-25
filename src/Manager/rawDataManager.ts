@@ -3,7 +3,7 @@ import csvtojson from "csvtojson";
 
 export const addData = () => {
   let add = csvtojson()
-    .fromFile("Model-Sample-Data.csv")
+    .fromFile(process.env.FILE || "Model-Sample-Data.csv")
     .then((csvData) => {
       for (let i = 0; i < csvData.length; i++) {
         let obj = csvData[i];
