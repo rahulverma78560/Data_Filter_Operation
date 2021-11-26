@@ -16,13 +16,6 @@ export const groupData=async()=>{
            ]);
            rawCollection.updateMany({}, { isCleaned: 1 }).exec();
          });
-         converter.json2csv( data, (err:any, csv:any) => {
-          if (err) {
-              throw err;
-          }
-          console.log(csv);
-          fs.writeFileSync(path.join("todo.csv"), csv);
-      });
        }).catch((error) => {
          console.log(error)
        });
