@@ -1,5 +1,5 @@
 Customer Name,Customer Domain,Subscription Id,Subscription Name,Resource Location,Resource Group,Consumption Date,Meter Id,Meter Name,Meter Category,Meter Subcategory,Frequency,Unit Of Measure, Unit Price,Quantity,Applicable Estimated Charges
-SAATHII,rakshith.com,sub-001,saathii-CaP TB,CENTRALINDIA,captbrg,11/1/2021,941a7a91-f0b4-4c70-be0f-d87ea6ff09ee,Data Transfer Out,Bandwidth,Bandwidth Inter-Region,UsageBased,1 GB,0,7E-06,0
+SAATHII,saathi.com,sub-001,saathii-CaP TB,CENTRALINDIA,captbrg,11/1/2021,941a7a91-f0b4-4c70-be0f-d87ea6ff09ee,Data Transfer Out,Bandwidth,Bandwidth Inter-Region,UsageBased,1 GB,0,7E-06,0
 SAATHII,saathi.com,sub-001,saathii-CaP TB,GLOBAL,captbrg,11/1/2021,d54686f0-77ff-43f3-9e7c-2099030d32a7,Public Queries,Azure DNS,Azure DNS,UsageBased,1M,0,0.000394,0
 SAATHII,saathi.com,sub-001,saathii-CaP TB,CENTRALINDIA,CapTBRG,11/1/2021,0f824807-2376-435c-95c9-f992b67a07b0,Operations,Key Vault,Key Vault,UsageBased,10K,0,0.0002,0
 SAATHII,saathi.com,sub-001,saathii-CaP TB,CENTRALINDIA,captbrg,11/1/2021,7910b1eb-292c-4462-92f8-d3c917924591,Data Transfer Out - ASIA To Any,Bandwidth,Bandwidth Inter-Region,UsageBased,1 GB,0,0.000339,0
@@ -648,7 +648,4 @@ SAATHII,saathi.com,sub-002,Saathii-CSP,CENTRALINDIA,SAATHI-RG,11/15/2021,f75ed2e
 SAATHII,saathi.com,sub-002,Saathii-CSP,CENTRALINDIA,Saathi-RG,11/15/2021,40551b4c-e8be-48ed-b70b-f8d25c7de724,Read Operations,Storage,General Block Blob,UsageBased,10K,0.0233450351905,1.7328,0.040438123634863
 SAATHII,saathi.com,sub-002,Saathii-CSP,CENTRALINDIA,Saathi-RG,11/15/2021,42e2a22f-fabf-41ea-a21e-e86bb3ff5799,Disk Read Operations,Storage,Standard Page Blob,UsageBased,10K,0,0.0965,0
 SAATHII,saathi.com,sub-002,Saathii-CSP,CENTRALINDIA,SAATHI-RG,11/15/2021,f75ed2e9-e762-4c18-b03d-2418850912f7,LRS Snapshots,Storage,Standard HDD Managed Disks,UsageBased,1 GB/Month,3.7504632061087,0.953016,3.57424386674003
-SAATHII,saathi.com,sub-002,Saathii-CSP,CENTRALINDIA,SAATHI-BACKUP-RG,11/15/2021,f75ed2e9-e762-4c18-b03d-2418850912f7,LRS Snapshots,Storage,Standard HDD Managed Disks,UsageBased,1 GB/Month,3.7504632061087,1.239264,4.64780418300607
-SAATHII,saathi.com,sub-002,Saathii-CSP,CENTRALINDIA,SAATHI-BACKUP-RG,11/15/2021,f75ed2e9-e762-4c18-b03d-2418850912f7,LRS Snapshots,Storage,Standard HDD Managed Disks,UsageBased,1 GB/Month,3.7504632061087,1.239264,4.64780418300607
-SAATHII,saathi.com,sub-002,Saathii-CSP,CENTRALINDIA,SAATHI-BACKUP-RG,11/15/2021,f75ed2e9-e762-4c18-b03d-2418850912f7,LRS Snapshots,Storage,Standard HDD Managed Disks,UsageBased,1 GB/Month,3.7504632061087,1.239264,4.64780418300607
 SAATHII,saathi.com,sub-002,Saathii-CSP,CENTRALINDIA,SAATHI-BACKUP-RG,11/15/2021,f75ed2e9-e762-4c18-b03d-2418850912f7,LRS Snapshots,Storage,Standard HDD Managed Disks,UsageBased,1 GB/Month,3.7504632061087,1.239264,4.64780418300607
