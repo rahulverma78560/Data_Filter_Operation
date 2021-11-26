@@ -26,11 +26,13 @@ function checkFileType(file: any, cb: any) {
 
 const upload = multer({
   storage,
-  fileFilter: (req, file, cb) => {
+  fileFilter: function (req, file, cb) {
     checkFileType(file, cb);
   },
 });
 
-uploadRouter.post("/uploadFile", upload.single("data"));
+uploadRouter.post("/uploadFile", upload.single("data"), (req, res) => {
+  res.send(`Success`);
+});
 
 export default uploadRouter;

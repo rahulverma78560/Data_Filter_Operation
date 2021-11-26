@@ -6,7 +6,7 @@ import chalk from "chalk";
 import path from "path";
 import { autoPost, autoDelete } from "./Config/jobScheduler";
 import routerMiddleware from "./Routes/routes";
-import uploadRouter from "./Routes/uploadRoutes";
+import uploadRouter from "./Config/fileUploads";
 
 const app = express();
 if (process.env.NODE_ENV === "development") {
