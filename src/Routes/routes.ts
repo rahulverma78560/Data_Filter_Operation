@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { fileUpload } from "../Config/fileUploads";
 import { updateDataHandller } from "../Controller/updateController";
 import { addDataHandler } from "../Controller/rawDataController";
 import { groupDataHandler } from "../Controller/subGroupController";
@@ -13,9 +12,9 @@ const routerMiddleware = Router();
 
 routerMiddleware.post("/rawCollection", addDataHandler);
 
-routerMiddleware.post("/updateGroup",addGroupHandler);
+routerMiddleware.post("/updateGroup", addGroupHandler);
 
-routerMiddleware.post("/updateLocation",addLocationHandler);
+routerMiddleware.post("/updateLocation", addLocationHandler);
 
 routerMiddleware.get("/location", groupByLocationHandler);
 
@@ -26,7 +25,5 @@ routerMiddleware.get("/:name", downloadDataHandler);
 routerMiddleware.patch("/updateData/:id", updateDataHandller);
 
 routerMiddleware.delete("/deleteData", removeDataHandler);
-
-routerMiddleware.post("/uploadFile", fileUpload.single("data"));
 
 export default routerMiddleware;

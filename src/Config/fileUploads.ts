@@ -1,5 +1,7 @@
 import path from "path";
+import express from "express";
 import multer from "multer";
+const uploadRouter = express.Router();
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
@@ -22,9 +24,15 @@ function checkFileType(file: any, cb: any) {
   }
 }
 
-export const fileUpload = multer({
+const upload = multer({
   storage,
-  fileFilter: (req, file, cb) => {
+  fileFilter: function (req, file, cb) {
     checkFileType(file, cb);
   },
 });
+
+uploadRouter.post("/uploadFile", upload.single("data"), (req, res) => {
+  res.send(`Success`);
+});
+
+export default uploadRouter;

@@ -6,6 +6,7 @@ import chalk from "chalk";
 import path from "path";
 import { autoPost, autoDelete } from "./Config/jobScheduler";
 import routerMiddleware from "./Routes/routes";
+import uploadRouter from "./Config/fileUploads";
 
 const app = express();
 if (process.env.NODE_ENV === "development") {
@@ -14,6 +15,7 @@ if (process.env.NODE_ENV === "development") {
 const jsonParserMiddleware = express.json();
 app.use(jsonParserMiddleware);
 app.use(routerMiddleware);
+app.use(uploadRouter);
 autoPost.start();
 autoDelete.start();
 connectDB();
