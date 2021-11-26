@@ -20,4 +20,19 @@ routerMiddleware.patch("/updateData/:id", updateDataHandller);
 
 routerMiddleware.delete("/deleteData", removeDataHandler);
 
+//routerMiddleware.get('/file',downloadcollection);
+
 export default routerMiddleware;
+
+
+
+// function (req, res, next) {
+//     const fileName = "C:/Users/Raksith Ballal M/Desktop/freshpull/Data_Filter_Operation/public/todos.csv"
+//     res.sendFile(fileName, function (err) {
+//       if (err) {
+//         next(err)
+//       } else {
+//         console.log(fileName)
+//       }
+//     })
+//   })

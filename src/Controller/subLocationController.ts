@@ -14,4 +14,3 @@ export const  groupByLocationHandler= (req: Request, res: Response) => {
 
 
 
-

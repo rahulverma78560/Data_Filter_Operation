@@ -1,7 +1,5 @@
 import { locationCollection } from "../model/Subs_Location_Schema";
 import { rawCollection } from "../model/Raw_collection_Schema";
-
-
 export const groupByLocation=async()=>{
   const data=await grouplocation().exec()
     const group=grouplocation().then(async (result) => {
@@ -47,4 +45,6 @@ function grouplocation()
 }
 
 
+
+  
 
