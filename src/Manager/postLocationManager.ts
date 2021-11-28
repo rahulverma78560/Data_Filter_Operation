@@ -1,7 +1,7 @@
 import { locationCollection } from './../model/Subs_Location_Schema';
 import csvtojson from "csvtojson";
 
-export const addGroup = () => {
+export const addLocation = () => {
   let add = csvtojson()
     .fromFile("uploads/data.csv")
     .then((csvData) => {
